@@ -16,6 +16,11 @@ $ kafka-manager-exporter -urls http://KAFKA_MANAGER_URL -interval 15s -addr 0.0.
 
 2019/04/02 17:56:00 Server Launched 127.0.0.1:9001 ...
 ^C2019/04/02 17:56:18 Server Shutdown
+
+# If you prefer docker
+
+$ docker run -it --rm -p 9001:9001 dreampuf/kafka-manager-exporter -urls http://KAFKA_MANAGER_URL -interval 15s -addr 0.0.0.0:9001
+2019/04/02 22:28:03 Server Launched 0.0.0.0:9001 ...
 ```
 
 ```bash
