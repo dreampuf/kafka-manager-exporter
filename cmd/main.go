@@ -349,6 +349,7 @@ func collect(wg *sync.WaitGroup, ctx context.Context, client *http.Client, kmurl
 				topicChangeRate.WithLabelValues(clusterName, t.Topic).Set(rateSum)
 
 
+				// comment this part as we don't need the JMX metrics of topic for now
 				_ = `
 				topicHTMLURL := fmt.Sprintf("%s/clusters/%s/topics/%s", kmurl, clusterName, t.Topic)
 				callHTML(ctx, client, topicHTMLURL, "table:nth-child(2)", func(selection *goquery.Selection) {
@@ -391,7 +392,8 @@ func collect(wg *sync.WaitGroup, ctx context.Context, client *http.Client, kmurl
 						var consumerTopicSummary kafka_manager_exporter.APITopicSummary
 						call(ctx, client, apiConsumerTopicSummaryURL, &consumerTopicSummary)
 
-						consumerTopicLag.WithLabelValues(clusterName, cName, cTopic).Set(float64(consumerTopicSummary.TotalLag)) consumerTopicPercentageCovered.WithLabelValues(clusterName, cName, cTopic).Set(float64(consumerTopicSummary.PercentageCovered))
+						consumerTopicLag.WithLabelValues(clusterName, cName, cTopic).Set(float64(consumerTopicSummary.TotalLag))
+						consumerTopicPercentageCovered.WithLabelValues(clusterName, cName, cTopic).Set(float64(consumerTopicSummary.PercentageCovered))
 						for n, partition := range consumerTopicSummary.PartitionOffsets {
 							consumerTopicPartitionOffset.WithLabelValues(clusterName, cName, cTopic, strconv.Itoa(n)).Set(float64(partition))
 						}
