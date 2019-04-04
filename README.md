@@ -1,4 +1,7 @@
 # kafka-manager-exporter
+
+[![image](https://images.microbadger.com/badges/image/dreampuf/kafka-manager-exporter.svg)](https://hub.docker.com/r/dreampuf/kafka-manager-exporter)
+
 A Prometheus Exporter For Kafka Manager
 
 # Usage 
